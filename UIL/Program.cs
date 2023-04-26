@@ -1,27 +1,20 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+namespace UIL;
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    public static void Main(string[] args)
+    {
+        Create(args).Build().Run();
+    }
+    public static IWebHostBuilder Create(string[] args) =>
+        WebHost.CreateDefaultBuilder(args).ConfigureLogging(logBuilder =>
+            {
+                logBuilder.ClearProviders();
+                logBuilder.AddConsole();
+                logBuilder.AddTraceSource("Information, ActivityTracing");
+                logBuilder.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+            })
+            .UseStartup<Startup>();
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();

@@ -2,7 +2,62 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if(User.Identity.IsAuthenticated){
+	<div class="main main--aside">
+		<div class="container">
+			<div class="main__inner">
+				<div class="aside">
+					<form>
+						<div class="aside__title">Поиск</div>
+						<div class="aside__text">Дата</div>
+						<input asp-for="DateTimeDown" class="input input--small" />
+						<input asp-for="DateTimeUp" class="input input--small" />
+						<div class="aside__text">Название</div>
+						<input asp-for="Name" class="input input--small" />
+						<div class="aside__text">Имя Поставщика</div>
+						<input asp-for="ProviderName" class="input input--small">
+						<div class="aside__text">Адрес поставщика</div>
+						<input asp-for="ProviderAdress" class="input input--small">
+						<br>
+						<br>
+						<button type="submit" class="btn btn--big">Найти</button>
+					</form>
+				</div>
+				<div class="catalog">
+					<div class="catalog__items">
+						@{
+							if (Model.Preporates!=null)
+							{
+								foreach (var item in Model.Preporates)
+								{
+									<div class="catalog__item">
+										@if (item.Image == null)
+										{
+											<div class="item__img" style="background-image:src('/images/box.png');"></div>
+										}
+										else
+										{
+											<img src="data:image/gif;base64,@Convert.ToBase64String(item.Image)">
+
+											<div class="item__img" background-image="src(@String.Concat("data:image/gif;base64,",@Convert.ToBase64String(item.Image)))"></div>
+										}
+										<div class="item__content">
+											<a asp-route-id="@item.Id" class="item__title">@item.Name</a>
+											<div class="item__infos">
+												<div class="item__info">Тип: @item.Type</div>
+												<div class="item__info">Количество: @item.Count</div>
+												<div class="item__info">Цена: @item.Cost</div>
+											</div>
+										</div>
+									</div>
+								}
+							}
+							
+						}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}

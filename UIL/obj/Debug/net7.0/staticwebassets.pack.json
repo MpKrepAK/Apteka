@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\js\\header.js",
+      "PackagePath": "staticwebassets\\js\\header.js"
+    },
+    {
+      "Id": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\styles\\style.css",
+      "PackagePath": "staticwebassets\\styles\\style.css"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.UIL.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.UIL.props",
+      "PackagePath": "build\\UIL.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.UIL.props",
+      "PackagePath": "buildMultiTargeting\\UIL.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.UIL.props",
+      "PackagePath": "buildTransitive\\UIL.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "hiwE8JSpuwLKxT5CVTho80TChUTZpftYJ6xSo00ND4g=",
+  "Source": "UIL",
+  "BasePath": "_content/UIL",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "UIL\\wwwroot",
+      "Source": "UIL",
+      "ContentRoot": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\",
+      "BasePath": "_content/UIL",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\js\\header.js",
+      "SourceId": "UIL",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\",
+      "BasePath": "_content/UIL",
+      "RelativePath": "js/header.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\header.js"
+    },
+    {
+      "Identity": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\styles\\style.css",
+      "SourceId": "UIL",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\wwwroot\\",
+      "BasePath": "_content/UIL",
+      "RelativePath": "styles/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\styles\\style.css"
+    }
+  ]
+}

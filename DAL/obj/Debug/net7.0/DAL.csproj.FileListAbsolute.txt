@@ -1,0 +1,17 @@
+D:\Programming\Projects\Test\123\Apteka\DAL\bin\Debug\net7.0\DAL.deps.json
+D:\Programming\Projects\Test\123\Apteka\DAL\bin\Debug\net7.0\DAL.runtimeconfig.json
+D:\Programming\Projects\Test\123\Apteka\DAL\bin\Debug\net7.0\DAL.dll
+D:\Programming\Projects\Test\123\Apteka\DAL\bin\Debug\net7.0\DAL.pdb
+D:\Programming\Projects\Test\123\Apteka\DAL\bin\Debug\net7.0\ML.dll
+D:\Programming\Projects\Test\123\Apteka\DAL\bin\Debug\net7.0\ML.pdb
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.csproj.AssemblyReference.cache
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.AssemblyInfoInputs.cache
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.AssemblyInfo.cs
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.csproj.CoreCompileInputs.cache
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.csproj.CopyComplete
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.dll
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\refint\DAL.dll
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.pdb
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\DAL.genruntimeconfig.cache
+D:\Programming\Projects\Test\123\Apteka\DAL\obj\Debug\net7.0\ref\DAL.dll

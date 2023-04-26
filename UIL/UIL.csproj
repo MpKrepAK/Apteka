@@ -18,12 +18,32 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Serilog" Version="3.0.0-dev-01958" />
+      <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.1-dev-00077" />
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\BLL\BLL.csproj" />
       <ProjectReference Include="..\ML\ML.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="wwwroot\images\box.png" />
+      <Resource Include="wwwroot\images\box.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
+      <Content Remove="wwwroot\images\user.png" />
+      <Resource Include="wwwroot\images\user.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
