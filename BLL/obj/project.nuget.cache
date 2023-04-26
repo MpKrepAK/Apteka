@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "iUEIj6gsbG1bmWYG0h7VaFnN5lgVWx8a2XidOCXpNpHwnGV03LCVSAgbkMguNq6hgSBQgHdXo9ABaYru+J1FiA==",
+  "dgSpecHash": "UeCJF+yC4E2Saf8gqgK9pFTUOSlHmBHjZMS7i/vkEIihuRrSqiK3PsgiYyJlTSwjfge939z6hKfM/1THZIk4iw==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Projects\\Test\\123\\Apteka\\BLL\\BLL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog\\3.0.0-dev-01958\\serilog.3.0.0-dev-01958.nupkg.sha512",
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00947\\serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
+  ],
   "logs": []
 }

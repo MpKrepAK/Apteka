@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "sqRHIf0QJ7UT6Fzu0h+a0JEfv1011mjkFfosp8eLMQqalnhs2ONX5mM/6MUeMoWDe+wCyHO/6Uu4KP/LNlieRQ==",
+  "dgSpecHash": "8CVNW7KdHyypPQQn/pOvzxcGDExjUfBDKk6AK/3xBISzRavL4gW+BUyMa7PJg6yltNrDQEaugJNFT9Uvc8CdIg==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Projects\\Test\\123\\Apteka\\DAL\\DAL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog\\3.0.0-dev-01958\\serilog.3.0.0-dev-01958.nupkg.sha512",
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00947\\serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
+  ],
   "logs": []
 }

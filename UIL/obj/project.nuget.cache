@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "n/TYr74Y1Y4Vwz3jGQeSq0Jf2SbPcgH78fCREjeKF/hsAMHRYinY3YWhfyefIoPDzPDLp2//ACujtfDzrCeYIw==",
+  "dgSpecHash": "It3o+Tox7uOKUZUj+bXgo8gLqsUUH5t9TByzHBCdBsgGG1KzlHs3XXAuGkr7z0kiOAI+3bKFkJof4NvyzHGZLw==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Projects\\Test\\123\\Apteka\\UIL\\UIL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog\\3.0.0-dev-01958\\serilog.3.0.0-dev-01958.nupkg.sha512",
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00947\\serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
+  ],
   "logs": []
 }

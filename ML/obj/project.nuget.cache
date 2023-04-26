@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "hMBpxB26vyMCxiSvPaeQQPOw7ouKyo8tTLMqNsU/6nRIb1b4fQdHN3Yc9LthuEZRA+ySn5oqsCNMtDeFRG1NwQ==",
+  "dgSpecHash": "DfJm2P4ODCFOI8C0QzwSgWgN37Ic/54TJuf7SZ++Kb5qqe6EzpeqhvXayrPWCbhMkcVN5lLGLq5ATLmW1IsT1g==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Projects\\Test\\123\\Apteka\\ML\\ML.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog\\3.0.0-dev-01958\\serilog.3.0.0-dev-01958.nupkg.sha512",
+    "C:\\Users\\111vv\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00947\\serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
+  ],
   "logs": []
 }
