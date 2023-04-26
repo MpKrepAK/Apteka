@@ -9,13 +9,13 @@ public class Preporate
     public int Id { get; set; }
     public string Name { get; set; }
     [ForeignKey("Provider")]
-    public int? ProviderId { get; set; }
+    public int ProviderId { get; set; }
     public Provider Provider { get; set; }
     [ForeignKey("Appointment")]
-    public int? AppointmentId { get; set; }
+    public int AppointmentId { get; set; }
     public Appointment Appointment { get; set; }
     [ForeignKey("PreporateType")]
-    public int? PreporateTypeId { get; set; }
+    public int PreporateTypeId { get; set; }
     public PreporateType PreporateType { get; set; }
     public DateTime DateOfProduction { get; set; }
     public double Cost { get; set; }

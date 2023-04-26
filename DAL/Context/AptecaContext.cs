@@ -14,9 +14,9 @@ public class AptecaContext : DbContext
     public DbSet<PreporateType> Types { get; set; } = null!;
     public AptecaContext(DbContextOptions<AptecaContext> options):base(options)
     {
-        //Database.EnsureDeleted();
+        Database.EnsureDeleted();
         Database.EnsureCreated();
-        //Create();
+        Create();
     }
 
     private void Create()
@@ -30,8 +30,8 @@ public class AptecaContext : DbContext
         Users.AddRange(
             new List<User>()
             {
-                new User() { RoleId = 1, FirstName = "Петр", LastName = "Петров", Password = "1", EMail = "1@mail.ru"},
-                new User() { RoleId = 2, FirstName = "Василий", LastName = "Васильев", Password = "2", EMail = "2@mail.ru"}
+                new User() { RoleId = 1, FirstName = "Петр", LastName = "Петров", Password = "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", EMail = "1@mail.ru"},
+                new User() { RoleId = 2, FirstName = "Василий", LastName = "Васильев", Password = "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35", EMail = "2@mail.ru"}
             });
         Adresses.AddRange(
             new List<Adress>()

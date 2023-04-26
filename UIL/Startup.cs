@@ -45,7 +45,8 @@ public class Startup
         });
 
         services.AddScoped<IRegistrationService, RegistrationService>();
-        //services.AddSingleton<IRegistrationService, RegistrationService>();
+        services.AddScoped<IAuthorizationService, AuthorizationService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 
         services.AddControllersWithViews();
