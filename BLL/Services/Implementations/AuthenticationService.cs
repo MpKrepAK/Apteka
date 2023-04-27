@@ -20,7 +20,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<ClaimsIdentity> AuthenticateUser(UserAuth user)
     {
-        var result = await _context.Users.FirstOrDefaultAsync(u => u.EMail == user.EMail && u.Password == HashPassword(user.Password));
+        var result = await _context.Users.FirstOrDefaultAsync(u => u.EMail == user.EMail && u.Password == user.Password);
 
         if (result == null)
         {
@@ -39,12 +39,4 @@ public class AuthenticationService : IAuthenticationService
         return identity;
     }
 
-    private string HashPassword(string password)
-    {
-        using (SHA256 hash = SHA256Managed.Create()) {
-            return String.Concat(hash
-                .ComputeHash(Encoding.UTF8.GetBytes(password))
-                .Select(item => item.ToString("x2")));
-        }
-    }
 }

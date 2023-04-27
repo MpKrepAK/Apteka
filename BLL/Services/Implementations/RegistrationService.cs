@@ -27,7 +27,7 @@ public class RegistrationService : IRegistrationService
             return false;
         }
 
-        user.Password = HashPassword(user.Password);
+        user.Password = user.Password;
         
         var u = _mapper.Map<UserRegistration, User>(user);
 
@@ -38,14 +38,5 @@ public class RegistrationService : IRegistrationService
         await _context.SaveChangesAsync();
 
         return true;
-    }
-
-    private string HashPassword(string password)
-    {
-        using (SHA256 hash = SHA256Managed.Create()) {
-            return String.Concat(hash
-                .ComputeHash(Encoding.UTF8.GetBytes(password))
-                .Select(item => item.ToString("x2")));
-        }
     }
 }

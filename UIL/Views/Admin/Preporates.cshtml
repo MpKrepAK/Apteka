@@ -4,9 +4,10 @@
 
 @model UIL.Models.PreporatesSearch
 @{
-    ViewData["Title"] = "Каталог";
+    ViewData["Title"] = "Препораты";
 	List<Preporate> preporates = PreporateRepository.GetAll().ToList();
 	List<Provider> providers = ProviderRepository.GetAll().ToList();
+	List<PreporateType> types = PreporateTypeRepository.GetAll().ToList();
 }
 
 @if(User.Identity.IsAuthenticated){
@@ -21,13 +22,10 @@
 					@* 	<input asp-for="DateUp" class="input input--small" /> *@
 					@* 	<div class="aside__text">Название</div> *@
 					@* 	<input asp-for="Name" class="input input--small" /> *@
-					@* 	<div class="aside__text">Поставщик</div> *@
-					@* 	<input asp-for="Name" class="input input--small" /> *@
-					@* 	<select asp-for="Appointment" asp-items="@(new SelectList(Model.Providers, nameof(Provider.Id), nameof(Provider.EMail)))"> *@
-					@* 		<option>Please select one</option> *@
-					@* 	</select> *@
-					@* 	@for (int i = 0; i < providers.Count; i++) *@
+					@* 	<div class="aside__text">Поставщики</div> *@
+					@* 	@foreach (var v in providers) *@
 					@* 	{ *@
+					@* 		<input name="Providers" value="@v" type="checkbox" @(providers.Contains(v) ? "checked" : "")/> *@
 					@* 	} *@
 					@* 	$1$ @for (int i = 0; i < providers.Count; i++) #1# *@
 					@* 	$1$ { #1# *@
@@ -44,6 +42,7 @@
 				<div class="catalog">
 					<div class="catalog__items">
 						@{
+							Console.WriteLine(preporates==null);
 							if (preporates!=null)
 							{
 								foreach (var item in preporates)
@@ -61,7 +60,7 @@
 										<div class="item__content">
 											<a asp-route-id="@item.Id.ToString()" asp-controller="Card" asp-action="Index" class="item__title">@item.Name</a>
 											<div class="item__infos">
-												<div class="item__info">Тип:  @PreporateTypeRepository.GetById(item.PreporateTypeId).Name</div>
+												<div class="item__info">Тип: @types.FirstOrDefault(x=>x.Id==item.PreporateTypeId).Name </div>
 												<div class="item__info">Цена: @item.Cost.ToString()</div>
 											</div>
 										</div>

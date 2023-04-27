@@ -2,6 +2,8 @@
 using BLL.Services.Implementations;
 using BLL.Services.Interfaces;
 using DAL.Context;
+using DAL.Interfaces;
+using DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ML;
@@ -48,6 +50,11 @@ public class Startup
         services.AddScoped<IAuthorizationService, AuthorizationService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
 
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPreporateRepository, PreporateRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IProviderRepository, ProviderRepository>();
+        services.AddScoped<IPreporateTypeRepository, PreporateTypeRepository>();
 
         services.AddControllersWithViews();
 

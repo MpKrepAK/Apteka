@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using UIL.Models;
 
 namespace UIL.Controllers;
@@ -7,22 +9,36 @@ namespace UIL.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private readonly IProviderRepository _providerRepository;
+    public HomeController(ILogger<HomeController> logger, IProviderRepository providerRepository)
     {
         _logger = logger;
+        _providerRepository = providerRepository;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var vm = new PreporatesSearch()
+        {
+            Providers = _providerRepository.GetAll().ToList()
+        };
+        
+        return View("Index",vm);
     }
 
-    public IActionResult Privacy()
+    public IActionResult GetImage(byte[] imageData)
     {
-        return View();
+        return new FileContentResult(imageData, "image/jpeg");
     }
-
+    
+    [HttpPost]
+    public IActionResult Filtered(PreporatesSearch preporatesSearch)
+    {
+        Console.WriteLine(preporatesSearch.Provider);
+        return View("Index",preporatesSearch);
+    }
+    
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

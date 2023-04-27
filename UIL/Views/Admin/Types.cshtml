@@ -1,0 +1,45 @@
+﻿@inject IPreporateTypeRepository PreporateTypeRepository
+
+@{
+    ViewData["Title"] = "Каталог";
+	List<PreporateType> preporates = PreporateTypeRepository.GetAll().ToList();
+}
+
+@if(User.Identity.IsAuthenticated){
+	<div class="main main--aside">
+		<div class="container">
+			<div class="main__inner">
+				<div class="catalog">
+					<div class="catalog__items">
+						@{
+							if (preporates!=null)
+							{
+								foreach (var item in preporates)
+								{
+									<div class="catalog__item">
+										<div class="item__content">
+											<a asp-action="Type" asp-controller="Card" asp-route-id="@item.Id.ToString()" class="item__title">@item.Name</a>
+										</div>
+										<label class="item__controls">
+											...
+											<input type="checkbox">
+											<div class="item__btns">
+												<a class="item__btn" asp-action="TypeCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+													Изменить
+												</a>
+												<a class="item__btn" asp-action="TypeDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+													Удалить
+												</a>
+											</div>
+										</label>
+									</div>
+								}
+							}
+						}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}

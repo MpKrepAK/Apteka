@@ -1,0 +1,36 @@
+﻿@model User
+
+@{
+    
+}
+
+<main class="main">
+    <div class="container">
+        <div class="main__inner">
+            <form asp-action="UpdateUser" asp-controller="Card">
+                <div class="two-columns">
+                    <div class="content">
+                        <div class="content__item">
+                            <div class="text">EMaIL</div>
+                            <input asp-for=Id type="hidden" class="input input--small">
+                            <input asp-for=EMail class="input input--small">
+                        </div>
+                        <div class="content__item">
+                            <div class="text">Пароль</div>
+                            <input asp-for=Password class="input input--small">
+                        </div>
+                        <div class="content__item">
+                                                        <div class="text">Имя</div>
+                                                        <input asp-for="FirstName" class="input input--small">
+                                                    </div>
+                        <div class="content__item">
+                                                                                <div class="text">Фамилия</div>
+                                                                                <input asp-for="LastName" class="input input--small">
+                                                                            </div>
+                        <button class="btn" type="submit">Сохранить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

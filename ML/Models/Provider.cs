@@ -8,9 +8,7 @@ public class Provider
     [Key]
     public int Id { get; set; }
     public string EMail { get; set; }
-    [ForeignKey("Adress")]
-    public int AdressId { get; set; }
-    public Adress Adress { get; set; }
+    public string Adress { get; set; }
     public ICollection<Preporate> Preporates { get; set; }
 
     public Provider()

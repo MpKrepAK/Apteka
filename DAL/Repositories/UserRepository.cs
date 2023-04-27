@@ -21,4 +21,29 @@ public class UserRepository : IUserRepository
     {
         return _Context.Users.FirstOrDefault(x => x.Id == Id);
     }
+
+    public User Add(User Entity)
+    {
+        _Context.Users.Add(Entity);
+        _Context.SaveChanges();
+        return Entity;
+    }
+
+    public User UpdateById(int Id, User Entity)
+    {
+        var u= _Context.Users.FirstOrDefault(x=>x.Id==Entity.Id);
+        u.FirstName = Entity.FirstName;
+        u.LastName = Entity.LastName;
+        u.EMail = Entity.EMail;
+        u.Password = Entity.Password;
+        _Context.SaveChanges();
+        return Entity;
+    }
+
+    public void DeleteById(int Id)
+    {
+        var e= _Context.Users.FirstOrDefault(x=>x.Id==Id);
+        _Context.Users.Remove(e);
+        _Context.SaveChanges();
+    }
 }
