@@ -53,4 +53,11 @@ public class PreporateTypeService : IPreporateTypeService
         _preporateTypeRepository.DeleteById(Id);
         return true;
     }
+
+    public async Task<TypeModel> GetById(int Id)
+    {
+        var type = _preporateTypeRepository.GetById(Id);
+        var vm = _mapper.Map<PreporateType, TypeModel>(type);
+        return vm;
+    }
 }

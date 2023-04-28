@@ -1,21 +1,28 @@
 ﻿@inject IPreporateTypeRepository PreporateTypeRepository
-
+@model TypesSearch
 @{
 	ViewBag.Title = "Типы препоратов";
-	List<PreporateType> preporates = PreporateTypeRepository.GetAll().ToList();
+	//List<PreporateType> preporates = PreporateTypeRepository.GetAll().ToList();
 }
 
-@if(User.Identity.IsAuthenticated){
-	<div class="main main--aside">
+<div class="main main--aside">
 		<div class="container">
 			<div class="main__inner">
+				<div class="aside">
+					<form asp-action="Types" asp-controller="Admin">
+						<div class="aside__title">Поиск</div>
+						<div class="aside__text">Название</div>
+						<input asp-for="Name" class="input input--small" />
+						<button type="submit" class="btn btn--big">Найти</button>
+					</form>
+				</div>
 				<div class="catalog">
-					<a asp-controller="Card" asp-action="TypeAdd">Добавить</a>
+					<a class="btn" asp-controller="Card" asp-action="TypeAdd">Добавить</a>
 					<div class="catalog__items">
 						@{
-							if (preporates != null)
+							if (Model.Types != null)
 							{
-								foreach (var item in preporates)
+								foreach (var item in Model.Types)
 								{
 									<div class="catalog__item">
 										<div class="item__content">
@@ -37,10 +44,8 @@
 								}
 							}
 						}
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-}

@@ -34,8 +34,8 @@ public class AptecaContext : DbContext
         Providers.AddRange(
             new List<Provider>()
             {
-                new Provider(){EMail = "123@mail.ru", Adress = "Россия, Пермь"},
-                new Provider(){EMail = "123@mail.ru", Adress = "Беларусь, Пинск"}
+                new Provider(){EMail = "123@mail.ru",Name = "Адриана", Adress = "Россия, Пермь"},
+                new Provider(){EMail = "123@mail.ru",Name = "Вилдбрисс", Adress = "Беларусь, Пинск"}
             });
         Types.AddRange(
             new List<PreporateType>()

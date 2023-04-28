@@ -1,43 +1,50 @@
-﻿@inject IRoleRepository RoleRepository
+﻿@model RolesSearch
 
 @{
 	ViewBag.Title = "Роли";
-	List<Role> Roles = RoleRepository.GetAll().ToList();
 }
 
 <div class="main main--aside">
 		<div class="container">
 			<div class="main__inner">
+				<div class="aside">
+					<form asp-action="Roles" asp-controller="Admin">
+                    						<div class="aside__title">Поиск</div>
+                    						<div class="aside__text">Название</div>
+                    						<input asp-for="Name" class="input input--small" />
+                    						<button type="submit" class="btn btn--big">Найти</button>
+                    					</form>
+				</div>
 				<div class="catalog">
-					<a asp-controller="Card" asp-action="RoleAdd">Добавить</a>
-					<div class="catalog__items">
-						@{
-							if (Roles != null)
-							{
-								foreach (var item in Roles)
-								{
-									<div class="catalog__item">
-										<div class="item__content">
-											<p class="item__title">@item.Name</p>
-										</div>
-										<label class="item__controls">
-											...
-											<input type="checkbox">
-											<div class="item__btns">
-												<a class="item__btn" asp-action="RoleCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
-													Изменить
-												</a>
-												<a class="item__btn" asp-action="RoleDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
-													Удалить
-												</a>
-											</div>
-										</label>
-									</div>
-								}
-							}
-						}
-
-					</div>
+					<a class="btn" asp-controller="Card" asp-action="RoleAdd">Добавить</a>
+                    					<div class="catalog__items">
+                    						@{
+                    							if (Model.Roles != null)
+                    							{
+                    								foreach (var item in Model.Roles)
+                    								{
+                    									<div class="catalog__item">
+                    										<div class="item__content">
+                    											<p class="item__title">@item.Name</p>
+                    										</div>
+                    										<label class="item__controls">
+                    											...
+                    											<input type="checkbox">
+                    											<div class="item__btns">
+                    												<a class="item__btn" asp-action="RoleCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+                    													Изменить
+                    												</a>
+                    												<a class="item__btn" asp-action="RoleDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+                    													Удалить
+                    												</a>
+                    											</div>
+                    										</label>
+                    									</div>
+                    								}
+                    							}
+                    						}
+                    
+                    					</div>
 				</div>
 			</div>
 		</div>

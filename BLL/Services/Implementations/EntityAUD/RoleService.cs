@@ -55,4 +55,11 @@ public class RoleService : IRoleService
         _roleRepository.DeleteById(Id);
         return true;
     }
+
+    public async Task<RoleModel> GetById(int Id)
+    {
+        var role = _roleRepository.GetById(Id);
+        var vm = _mapper.Map<Role, RoleModel>(role);
+        return vm;
+    }
 }

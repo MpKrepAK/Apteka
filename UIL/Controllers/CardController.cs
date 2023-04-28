@@ -15,10 +15,11 @@ public class CardController : Controller
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    private readonly IPreporateRepository _preporateRepository;
-    private readonly IUserRepository _userRepository;
-    private readonly IPreporateTypeRepository _preporateTypeRepository;
-    private readonly IRoleRepository _roleRepository;
+    // private readonly IPreporateRepository _preporateRepository;
+    // private readonly IUserRepository _userRepository;
+    // private readonly IPreporateTypeRepository _preporateTypeRepository;
+    // private readonly IRoleRepository _roleRepository;
+    // private readonly IProviderRepository _providerRepository;
     
     private readonly IPreporateTypeService _preporateTypeService;
     private readonly IRoleService _roleService;
@@ -29,15 +30,17 @@ public class CardController : Controller
         IUserRepository userRepository, 
         IPreporateTypeRepository preporateTypeRepository,
         IRoleRepository roleRepository,
+        IProviderRepository providerRepository,
         IPreporateTypeService preporateTypeService,
         IRoleService roleService)
     {
         _logger = logger;
         _mapper = mapper;
-        _preporateRepository = preporateRepository;
-        _userRepository = userRepository;
-        _preporateTypeRepository = preporateTypeRepository;
-        _roleRepository = roleRepository;
+        // _preporateRepository = preporateRepository;
+        // _userRepository = userRepository;
+        // _preporateTypeRepository = preporateTypeRepository;
+        // _roleRepository = roleRepository;
+        // _providerRepository = providerRepository;
         
         _preporateTypeService = preporateTypeService;
         _roleService = roleService;
@@ -46,20 +49,22 @@ public class CardController : Controller
     [HttpGet]
     public IActionResult Index(int Id)
     {
-        var prep = _preporateRepository.GetById(Id);
-        return View("Preporate",prep);
+        //var prep = _preporateRepository.GetById(Id);
+        //return View("Preporate",prep);
+        return View("Preporate");
     }
     [HttpGet]
     public IActionResult UserCard()
     {
-        var id= Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-        User u = _userRepository.GetById(id);
-        return View("User",u);
+        //var id= Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+        //User u = _userRepository.GetById(id);
+        //return View("User",u);
+        return View("User");
     }
     [HttpPost]
     public IActionResult UpdateUser(User u)
     {
-        _userRepository.UpdateById(u.Id,u);
+        //_userRepository.UpdateById(u.Id,u);
         return RedirectToAction("Index", "Home");
     }
     
@@ -67,11 +72,13 @@ public class CardController : Controller
     #region Type
 
     [HttpGet]
-    public IActionResult TypeCard(int Id)
+    public async Task<IActionResult> TypeCard(int Id)
     {
-        var type = _preporateTypeRepository.GetById(Id);
-        var vm = _mapper.Map<PreporateType, TypeModel>(type);
-        return View("Type",vm);
+        var type = _preporateTypeService.GetById(Id);
+        await type;
+        if (type.Result == null)
+            return RedirectToAction("Types", "Admin");
+        return View("Type",type.Result);
     }
     
     [HttpGet]
@@ -117,11 +124,13 @@ public class CardController : Controller
     #region Role
 
     [HttpGet]
-    public IActionResult RoleCard(int Id)
+    public async Task<IActionResult> RoleCard(int Id)
     {
-        var type = _roleRepository.GetById(Id);
-        var vm = _mapper.Map<Role, RoleModel>(type);
-        return View("Role",vm);
+        var role = _roleService.GetById(Id);
+        await role;
+        if (role.Result == null)
+            return RedirectToAction("Roles", "Admin");
+        return View("Role",role.Result);
     }
     
     [HttpGet]
