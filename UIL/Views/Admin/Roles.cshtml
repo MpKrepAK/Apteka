@@ -1,21 +1,20 @@
-﻿@inject IPreporateTypeRepository PreporateTypeRepository
+﻿@inject IRoleRepository RoleRepository
 
 @{
-	ViewBag.Title = "Типы препоратов";
-	List<PreporateType> preporates = PreporateTypeRepository.GetAll().ToList();
+	ViewBag.Title = "Роли";
+	List<Role> Roles = RoleRepository.GetAll().ToList();
 }
 
-@if(User.Identity.IsAuthenticated){
-	<div class="main main--aside">
+<div class="main main--aside">
 		<div class="container">
 			<div class="main__inner">
 				<div class="catalog">
-					<a asp-controller="Card" asp-action="TypeAdd">Добавить</a>
+					<a asp-controller="Card" asp-action="RoleAdd">Добавить</a>
 					<div class="catalog__items">
 						@{
-							if (preporates != null)
+							if (Roles != null)
 							{
-								foreach (var item in preporates)
+								foreach (var item in Roles)
 								{
 									<div class="catalog__item">
 										<div class="item__content">
@@ -25,10 +24,10 @@
 											...
 											<input type="checkbox">
 											<div class="item__btns">
-												<a class="item__btn" asp-action="TypeCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+												<a class="item__btn" asp-action="RoleCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
 													Изменить
 												</a>
-												<a class="item__btn" asp-action="TypeDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+												<a class="item__btn" asp-action="RoleDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
 													Удалить
 												</a>
 											</div>
@@ -43,4 +42,3 @@
 			</div>
 		</div>
 	</div>
-}

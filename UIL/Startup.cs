@@ -51,6 +51,7 @@ public class Startup
         services.AddScoped<IAuthenticationService, AuthenticationService>();
 
         services.AddScoped<IPreporateTypeService, PreporateTypeService>();
+        services.AddScoped<IRoleService, RoleService>();
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPreporateRepository, PreporateRepository>();

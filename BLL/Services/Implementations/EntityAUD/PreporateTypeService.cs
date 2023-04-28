@@ -20,6 +20,9 @@ public class PreporateTypeService : IPreporateTypeService
         if (model == null)
             return false;
 
+        if (_preporateTypeRepository.GetAll().Where(x=>x.Name==model.Name).ToList().Count>0)
+            return false;
+        
         var mapped = _mapper.Map<TypeModel, PreporateType>(model);
         if (mapped==null)
             return false;

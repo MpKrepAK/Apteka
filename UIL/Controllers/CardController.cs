@@ -13,25 +13,34 @@ namespace UIL.Controllers;
 [Authorize(Roles="Admin")]
 public class CardController : Controller
 {
+    private readonly IMapper _mapper;
+    private readonly ILogger _logger;
     private readonly IPreporateRepository _preporateRepository;
     private readonly IUserRepository _userRepository;
     private readonly IPreporateTypeRepository _preporateTypeRepository;
-    private readonly ILogger _logger;
+    private readonly IRoleRepository _roleRepository;
+    
     private readonly IPreporateTypeService _preporateTypeService;
-    private readonly IMapper _mapper;
+    private readonly IRoleService _roleService;
+    
     public CardController(ILogger<CardController> logger,
         IMapper mapper,
         IPreporateRepository preporateRepository, 
         IUserRepository userRepository, 
-        IPreporateTypeRepository preporateTypeRepository, 
-        IPreporateTypeService preporateTypeService)
+        IPreporateTypeRepository preporateTypeRepository,
+        IRoleRepository roleRepository,
+        IPreporateTypeService preporateTypeService,
+        IRoleService roleService)
     {
         _logger = logger;
         _mapper = mapper;
         _preporateRepository = preporateRepository;
         _userRepository = userRepository;
         _preporateTypeRepository = preporateTypeRepository;
+        _roleRepository = roleRepository;
+        
         _preporateTypeService = preporateTypeService;
+        _roleService = roleService;
     }
     
     [HttpGet]
@@ -100,8 +109,58 @@ public class CardController : Controller
         var res = await _preporateTypeService.Add(type);
         if (!res)
             return View("AddType", type);
-        _logger.LogInformation($"Тип препората с добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        _logger.LogInformation($"Тип препората добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
         return RedirectToAction("Types","Admin");
+    }
+    #endregion
+    
+    #region Role
+
+    [HttpGet]
+    public IActionResult RoleCard(int Id)
+    {
+        var type = _roleRepository.GetById(Id);
+        var vm = _mapper.Map<Role, RoleModel>(type);
+        return View("Role",vm);
+    }
+    
+    [HttpGet]
+    public IActionResult RoleAdd()
+    {
+        return View("AddRole",new RoleModel());
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> RoleDel(int Id)
+    {
+        var res= await _roleService.Delete(Id);
+        if (res)
+            _logger.LogInformation($"Роль с Id {Id} удалена пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Roles","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> RoleUpdate(RoleModel type)
+    {
+        if (!ModelState.IsValid)
+            return View("Role", type);
+        var res = await _roleService.Update(type);
+        if (!res)
+            return View("Role", type);
+        _logger.LogInformation($"Роль с Id {type.Id} изменена пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Roles","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> RoleAddSave(RoleModel type)
+    {
+        if (!ModelState.IsValid)
+            return View("AddRole", type);
+        var res = await _roleService.Add(type);
+        if (!res)
+            return View("AddRole", type);
+        _logger.LogInformation($"Роль добавлена пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Roles","Admin");
     }
     #endregion
 }

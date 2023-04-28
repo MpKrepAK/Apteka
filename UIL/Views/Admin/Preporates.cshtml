@@ -4,7 +4,7 @@
 
 @model UIL.Models.PreporatesSearch
 @{
-    ViewData["Title"] = "Препораты";
+	ViewBag.Title = "Препораты";
 	List<Preporate> preporates = PreporateRepository.GetAll().ToList();
 	List<Provider> providers = ProviderRepository.GetAll().ToList();
 	List<PreporateType> types = PreporateTypeRepository.GetAll().ToList();

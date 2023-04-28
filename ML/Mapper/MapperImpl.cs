@@ -11,5 +11,9 @@ public class MapperImpl : Profile
         CreateMap<UserCard, User>();
         CreateMap<TypeModel, PreporateType>();
         CreateMap<PreporateType, TypeModel>();
+        CreateMap<RoleModel, Role>();
+        CreateMap<Role, RoleModel>();
+        CreateMap<ProviderModel, Provider>();
+        CreateMap<Provider, ProviderModel>();
     }
 }

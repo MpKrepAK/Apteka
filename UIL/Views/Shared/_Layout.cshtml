@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles/style.css">
-	<title>Каталог</title>
+	<title>@ViewBag.Title</title>
 </head>
 <body>
 	<header class="header">
@@ -14,15 +14,6 @@
 				<a asp-controller="Home" asp-action="Index" class="logo">
 					Аптека
 				</a>
-				@{
-					if (User.IsInRole("Admin"))
-					{
-						<nav class="nav">
-							<a class="nav__item" asp-controller="Admin" asp-action="ProductControl">Управление складом</a>
-							<a class="nav__item" asp-controller="Admin" asp-action="UsersControl">Управлением аккаунтами</a>
-						</nav>
-					}
-				}
 
 				<button class="header__profile">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
@@ -38,6 +29,11 @@
 						<div class="header__menu">
 							<div class="title">Вы авторезированы</div>
 							<a class="btn" asp-controller="Card" asp-action="UserCard">Личный кабинет</a>
+							@if (User.IsInRole("Admin"))
+							{
+								<a class="btn" asp-controller="Admin" asp-action="Index">Админка</a>
+							}
+							
 							<a asp-controller="AccountVerification" asp-action="Logout" class="btn">Выйти</a>
 						</div>
 

@@ -24,7 +24,7 @@ public class AdminController : Controller
     }
     public IActionResult Roles()
     {
-        return View("AdminNav");
+        return View();
     }
     public IActionResult Users()
     {

@@ -2,9 +2,9 @@
 
 namespace BLL.Services.Interfaces;
 
-public interface IEntityService
+public interface IEntityService<T>
 {
-    Task<bool> Add(TypeModel model);
-    Task<bool> Update(TypeModel model);
+    Task<bool> Add(T model);
+    Task<bool> Update(T model);
     Task<bool> Delete(int Id);
 }
