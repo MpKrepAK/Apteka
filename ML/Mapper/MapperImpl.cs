@@ -9,5 +9,7 @@ public class MapperImpl : Profile
     {
         CreateMap<UserRegistration, User>();
         CreateMap<UserCard, User>();
+        CreateMap<TypeModel, PreporateType>();
+        CreateMap<PreporateType, TypeModel>();
     }
 }
