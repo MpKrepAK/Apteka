@@ -10,15 +10,16 @@
 		<div class="container">
 			<div class="main__inner">
 				<div class="catalog">
+					<a asp-controller="Card" asp-action="TypeAdd">Добавить</a>
 					<div class="catalog__items">
 						@{
-							if (preporates!=null)
+							if (preporates != null)
 							{
 								foreach (var item in preporates)
 								{
 									<div class="catalog__item">
 										<div class="item__content">
-											<a asp-action="Type" asp-controller="Card" asp-route-id="@item.Id.ToString()" class="item__title">@item.Name</a>
+											<a asp-controller="Card" asp-action="Type" asp-route-id="@item.Id.ToString()" class="item__title">@item.Name</a>
 										</div>
 										<label class="item__controls">
 											...

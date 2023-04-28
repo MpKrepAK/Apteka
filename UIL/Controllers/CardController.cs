@@ -13,7 +13,7 @@ public class CardController : Controller
     private readonly IUserRepository _userRepository;
     private readonly IPreporateTypeRepository _preporateTypeRepository;
     private readonly ILogger _logger;
-    public CardController(ILogger logger,
+    public CardController(ILogger<CardController> logger,
         IPreporateRepository preporateRepository, 
         IUserRepository userRepository, 
         IPreporateTypeRepository preporateTypeRepository)
@@ -63,6 +63,17 @@ public class CardController : Controller
     public IActionResult TypeDel(int Id)
     {
         _preporateTypeRepository.DeleteById(Id);
+        return RedirectToAction("Types","Admin");
+    }
+    [HttpGet]
+    public IActionResult TypeAdd()
+    {
+        return View("Type",new PreporateType());
+    }
+    [HttpPost]
+    public IActionResult TypeAddSave(PreporateType type)
+    {
+        _preporateTypeRepository.UpdateById(type.Id, type);
         return RedirectToAction("Types","Admin");
     }
     #endregion
