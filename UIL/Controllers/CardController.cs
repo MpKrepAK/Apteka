@@ -24,6 +24,7 @@ public class CardController : Controller
     private readonly IPreporateTypeService _preporateTypeService;
     private readonly IRoleService _roleService;
     private readonly IProviderService _providerService;
+    private readonly IUserService _userService;
     
     public CardController(ILogger<CardController> logger,
         IMapper mapper,
@@ -34,7 +35,8 @@ public class CardController : Controller
         IProviderRepository providerRepository,
         IPreporateTypeService preporateTypeService,
         IRoleService roleService,
-        IProviderService providerService)
+        IProviderService providerService,
+        IUserService userService)
     {
         _logger = logger;
         _mapper = mapper;
@@ -47,6 +49,7 @@ public class CardController : Controller
         _preporateTypeService = preporateTypeService;
         _roleService = roleService;
         _providerService = providerService;
+        _userService = userService;
     }
     
     [HttpGet]
@@ -56,22 +59,7 @@ public class CardController : Controller
         //return View("Preporate",prep);
         return View("Preporate");
     }
-    [HttpGet]
-    public IActionResult UserCard()
-    {
-        //var id= Convert.ToInt32(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-        //User u = _userRepository.GetById(id);
-        //return View("User",u);
-        return View("User");
-    }
-    [HttpPost]
-    public IActionResult UpdateUser(User u)
-    {
-        //_userRepository.UpdateById(u.Id,u);
-        return RedirectToAction("Index", "Home");
-    }
-    
-    
+
     #region Type
 
     [HttpGet]
@@ -176,7 +164,7 @@ public class CardController : Controller
     }
     #endregion
     
-    #region Type
+    #region Provider
 
     [HttpGet]
     public async Task<IActionResult> ProviderCard(int Id)
@@ -225,6 +213,58 @@ public class CardController : Controller
             return View("AddProvider", provider);
         _logger.LogInformation($"Поставщик добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
         return RedirectToAction("Providers","Admin");
+    }
+    #endregion
+    
+    #region User
+
+    [HttpGet]
+    public async Task<IActionResult> UserCard(int Id)
+    {
+        var user = _userService.GetById(Id);
+        await user;
+        if (user.Result == null)
+            return RedirectToAction("Users", "Admin");
+        return View("User",user.Result);
+    }
+    
+    [HttpGet]
+    public IActionResult UserAdd()
+    {
+        return View("AddUser",new UserModel());
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> UserDel(int Id)
+    {
+        var res= await _userService.Delete(Id);
+        if (res)
+            _logger.LogInformation($"Пользователь с Id {Id} удален пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Users","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> UserUpdate(UserModel user)
+    {
+        if (!ModelState.IsValid)
+            return View("User", user);
+        var res = await _userService.Update(user);
+        if (!res)
+            return View("User", user);
+        _logger.LogInformation($"Пользователь с Id {user.Id} изменен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Users","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> UserAddSave(UserModel user)
+    {
+        if (!ModelState.IsValid)
+            return View("AddUser", user);
+        var res = await _userService.Add(user);
+        if (!res)
+            return View("AddUser", user);
+        _logger.LogInformation($"Пользователь добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Users","Admin");
     }
     #endregion
 }

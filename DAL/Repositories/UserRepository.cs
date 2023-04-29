@@ -36,6 +36,7 @@ public class UserRepository : IUserRepository
         u.LastName = Entity.LastName;
         u.EMail = Entity.EMail;
         u.Password = Entity.Password;
+        u.RoleId = Entity.RoleId;
         _Context.SaveChanges();
         return Entity;
     }

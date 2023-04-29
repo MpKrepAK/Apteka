@@ -50,16 +50,12 @@ public class AdminController : Controller
             vm = new TypesSearch();
         else
             vm = model;
+        vm.Types = _preporateTypeRepository.GetAll().Select(x=>_mapper.Map<PreporateType,TypeModel>(x)).ToList();
         if (!vm.Name.IsNullOrEmpty())
         {
-            vm.Types = _preporateTypeRepository.GetAll()
+            vm.Types = vm.Types
                 .Where(x => x.Name.ToLower().Contains(vm.Name.ToLower()))
-                .Select(x=>_mapper.Map<PreporateType,TypeModel>(x))
                 .ToList();
-        }
-        else
-        {
-            vm.Types = _preporateTypeRepository.GetAll().Select(x=>_mapper.Map<PreporateType,TypeModel>(x)).ToList();
         }
         return View(vm);
     }
@@ -76,25 +72,19 @@ public class AdminController : Controller
         if (!vm.Name.IsNullOrEmpty())
         {
             vm.Providers = vm.Providers
-                .Select(x=>_mapper.Map<ProviderModel,Provider>(x))
                 .Where(x => x.Name.ToLower().Contains(vm.Name.ToLower()))
-                .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
                 .ToList();
         }
         if (!vm.EMail.IsNullOrEmpty())
         {
             vm.Providers = vm.Providers
-                .Select(x=>_mapper.Map<ProviderModel,Provider>(x))
                 .Where(x => x.EMail.ToLower().Contains(vm.EMail.ToLower()))
-                .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
                 .ToList();
         }
         if (!vm.Adress.IsNullOrEmpty())
         {
             vm.Providers = vm.Providers
-                .Select(x=>_mapper.Map<ProviderModel,Provider>(x))
                 .Where(x => x.Adress.ToLower().Contains(vm.Adress.ToLower()))
-                .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
                 .ToList();
         }
         return View(vm);
@@ -106,21 +96,60 @@ public class AdminController : Controller
             vm = new RolesSearch();
         else
             vm = model;
+        vm.Roles = _roleRepository.GetAll().Select(x=>_mapper.Map<Role,RoleModel>(x)).ToList();
         if (!vm.Name.IsNullOrEmpty())
         {
-            vm.Roles = _roleRepository.GetAll()
+            vm.Roles = vm.Roles
                 .Where(x => x.Name.ToLower().Contains(vm.Name.ToLower()))
-                .Select(x=>_mapper.Map<Role,RoleModel>(x))
                 .ToList();
-        }
-        else
-        {
-            vm.Roles = _roleRepository.GetAll().Select(x=>_mapper.Map<Role,RoleModel>(x)).ToList();
         }
         return View(vm);
     }
-    public IActionResult Users()
+    public IActionResult Users(UsersSearch model)
     {
-        return View("AdminNav");
+        UsersSearch vm;
+        if (model==null)
+            vm = new UsersSearch();
+        else
+            vm = model;
+        vm.Roles = _roleRepository.GetAll().Select(x=>_mapper.Map<Role,RoleModel>(x)).ToList();
+        vm.Users = _userRepository.GetAll().Select(x=>_mapper.Map<User,UserModel>(x)).ToList();
+        if (model.SelectedRoles!=null&&model.SelectedRoles.Count>0)
+        {
+            
+            vm.Users = new List<UserModel>();
+            foreach (var item in model.SelectedRoles)
+            {
+                vm.Users.AddRange(
+                    _userRepository.GetAll().Where(x=>x.RoleId==item)
+                        .Select(x=>_mapper.Map<User,UserModel>(x))
+                        .ToList());
+            }
+        }
+        if (!model.FirstName.IsNullOrEmpty())
+        {
+            vm.Users = vm.Users
+                .Where(x => x.FirstName.ToLower().Contains(model.FirstName.ToLower()))
+                .ToList();
+        }
+        if (!model.LastName.IsNullOrEmpty())
+        {
+            vm.Users = vm.Users
+                .Where(x => x.LastName.ToLower().Contains(model.LastName.ToLower()))
+                .ToList();
+        }
+        if (!model.EMail.IsNullOrEmpty())
+        {
+            vm.Users = vm.Users
+                .Where(x => x.EMail.ToLower().Contains(model.EMail.ToLower()))
+                .ToList();
+        }
+        if (!model.Password.IsNullOrEmpty())
+        {
+            vm.Users = vm.Users
+                .Where(x => x.Password.ToLower().Contains(model.Password.ToLower()))
+                .ToList();
+        }
+        return View(model);
     }
 }

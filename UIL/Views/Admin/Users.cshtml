@@ -1,0 +1,69 @@
+﻿@model UsersSearch
+
+@{
+	ViewBag.Title = "Пользователи";
+}
+
+<div class="main main--aside">
+		<div class="container">
+			<div class="main__inner">
+				<div class="aside">
+					<form asp-action="Users" asp-controller="Admin">
+						<div class="aside__title">Поиск</div>
+						<div class="aside__text">Имя</div>
+						<input asp-for="FirstName" class="input input--small" />
+						<div class="aside__text">Фамилия</div>
+						<input asp-for="LastName" class="input input--small" />
+						<div class="aside__text">EMail</div>
+						<input asp-for="EMail" class="input input--small" />
+						<div class="aside__text">Пароль</div>
+						<input asp-for="Password" class="input input--small" />
+						<div class="aside__text">Роли</div>
+						@for (int i = 0; i < Model.Roles.Count; i++)
+						{
+							<input type="checkbox" name="SelectedRoles" value="@Model.Roles[i].Id.ToString()"/>
+							<label>@Model.Roles[i].Name</label>
+						}
+						<button type="submit" class="btn btn--big">Найти</button>
+					</form>
+				</div>
+				<div class="catalog">
+					<a class="btn" asp-controller="Card" asp-action="UserAdd">Добавить</a>
+					<div class="catalog__items">
+						@{
+							if (Model.Users != null)
+							{
+								foreach (var item in Model.Users)
+								{
+									var CardTitle=item.FirstName + " " + item.LastName;
+									<div class="catalog__item">
+										<div class="item__content">
+											<p class="item__title">@CardTitle</p>
+										</div>
+										<label class="item__controls">
+											...
+											<input type="checkbox">
+											<div class="item__btns">
+												<a class="item__btn" asp-action="UserCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+													Изменить
+												</a>
+												<a class="item__btn" asp-action="UserDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+													Удалить
+												</a>
+											</div>
+										</label>
+										<div class="item__infos">
+											<div class="item__info">Имя: @item.FirstName </div>
+											<div class="item__info">Фамилия: @item.LastName </div>
+											<div class="item__info">EMail: @item.EMail </div>
+											<div class="item__info">Пароль: @item.Password</div>
+											</div>
+									</div>
+								}
+							}
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
