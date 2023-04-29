@@ -23,6 +23,7 @@ public class CardController : Controller
     
     private readonly IPreporateTypeService _preporateTypeService;
     private readonly IRoleService _roleService;
+    private readonly IProviderService _providerService;
     
     public CardController(ILogger<CardController> logger,
         IMapper mapper,
@@ -32,7 +33,8 @@ public class CardController : Controller
         IRoleRepository roleRepository,
         IProviderRepository providerRepository,
         IPreporateTypeService preporateTypeService,
-        IRoleService roleService)
+        IRoleService roleService,
+        IProviderService providerService)
     {
         _logger = logger;
         _mapper = mapper;
@@ -44,6 +46,7 @@ public class CardController : Controller
         
         _preporateTypeService = preporateTypeService;
         _roleService = roleService;
+        _providerService = providerService;
     }
     
     [HttpGet]
@@ -170,6 +173,58 @@ public class CardController : Controller
             return View("AddRole", type);
         _logger.LogInformation($"Роль добавлена пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
         return RedirectToAction("Roles","Admin");
+    }
+    #endregion
+    
+    #region Type
+
+    [HttpGet]
+    public async Task<IActionResult> ProviderCard(int Id)
+    {
+        var provider = _providerService.GetById(Id);
+        await provider;
+        if (provider.Result == null)
+            return RedirectToAction("Types", "Admin");
+        return View("Provider",provider.Result);
+    }
+    
+    [HttpGet]
+    public IActionResult ProviderAdd()
+    {
+        return View("AddProvider",new ProviderModel());
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> ProviderDel(int Id)
+    {
+        var res= await _providerService.Delete(Id);
+        if (res)
+            _logger.LogInformation($"Поставщик Id {Id} удален пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Providers","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> ProviderUpdate(ProviderModel provider)
+    {
+        if (!ModelState.IsValid)
+            return View("Provider", provider);
+        var res = await _providerService.Update(provider);
+        if (!res)
+            return View("Provider", provider);
+        _logger.LogInformation($"Поставщик с Id {provider.Id} изменен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Providers","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> ProviderAddSave(ProviderModel provider)
+    {
+        if (!ModelState.IsValid)
+            return View("AddProvider", provider);
+        var res = await _providerService.Add(provider);
+        if (!res)
+            return View("AddProvider", provider);
+        _logger.LogInformation($"Поставщик добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Providers","Admin");
     }
     #endregion
 }

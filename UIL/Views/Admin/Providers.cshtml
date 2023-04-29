@@ -1,6 +1,55 @@
-﻿@model ML.Mapper.ProviderModel
+﻿@model ProvidersSearch
 
 @{
     ViewBag.Title = "Поставщики";
 }
 
+<div class="main main--aside">
+    <div class="container">
+        <div class="main__inner">
+            <div class="aside">
+                <form asp-action="Providers" asp-controller="Admin">
+                    <div class="aside__title">Поиск</div>
+                    <div class="aside__text">Название</div>
+                    <input asp-for="Name" class="input input--small" />
+                    <div class="aside__text">Почта</div>
+                    <input asp-for="EMail" class="input input--small" />
+                    <div class="aside__text">Адрес</div>
+                                        <input asp-for="Adress" class="input input--small" />
+                    <button type="submit" class="btn btn--big">Найти</button>
+                </form>
+            </div>
+            <div class="catalog">
+                <a class="btn" asp-controller="Card" asp-action="ProviderAdd">Добавить</a>
+                <div class="catalog__items">
+                    @{
+                        if (Model.Providers != null)
+                        {
+                            foreach (var item in Model.Providers)
+                            {
+                                <div class="catalog__item">
+                                    <div class="item__content">
+                                        <p class="item__title">@item.Name</p>
+                                    </div>
+                                    <label class="item__controls">
+                                        ...
+                                        <input type="checkbox">
+                                        <div class="item__btns">
+                                            <a class="item__btn" asp-action="ProviderCard" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+                                                Изменить
+                                            </a>
+                                            <a class="item__btn" asp-action="ProviderDel" asp-controller="Card" asp-route-id="@item.Id.ToString()">
+                                                Удалить
+                                            </a>
+                                        </div>
+                                    </label>
+                                </div>
+                            }
+                        }
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

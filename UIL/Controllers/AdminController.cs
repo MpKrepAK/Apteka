@@ -63,9 +63,41 @@ public class AdminController : Controller
         }
         return View(vm);
     }
-    public IActionResult Providers()
+    public IActionResult Providers(ProvidersSearch model)
     {
-        return View("AdminNav");
+        ProvidersSearch vm;
+        if (model==null)
+            vm = new ProvidersSearch();
+        else
+            vm = model;
+        vm.Providers = _providerRepository.GetAll()
+            .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
+            .ToList();
+        if (!vm.Name.IsNullOrEmpty())
+        {
+            vm.Providers = vm.Providers
+                .Select(x=>_mapper.Map<ProviderModel,Provider>(x))
+                .Where(x => x.Name.ToLower().Contains(vm.Name.ToLower()))
+                .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
+                .ToList();
+        }
+        if (!vm.EMail.IsNullOrEmpty())
+        {
+            vm.Providers = vm.Providers
+                .Select(x=>_mapper.Map<ProviderModel,Provider>(x))
+                .Where(x => x.EMail.ToLower().Contains(vm.EMail.ToLower()))
+                .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
+                .ToList();
+        }
+        if (!vm.Adress.IsNullOrEmpty())
+        {
+            vm.Providers = vm.Providers
+                .Select(x=>_mapper.Map<ProviderModel,Provider>(x))
+                .Where(x => x.Adress.ToLower().Contains(vm.Adress.ToLower()))
+                .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
+                .ToList();
+        }
+        return View(vm);
     }
     public IActionResult Roles(RolesSearch model)
     {

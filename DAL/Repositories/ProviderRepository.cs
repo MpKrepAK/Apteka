@@ -32,6 +32,7 @@ public class ProviderRepository : IProviderRepository
     public Provider UpdateById(int Id, Provider Entity)
     {
         var u= _Context.Providers.FirstOrDefault(x=>x.Id==Entity.Id);
+        u.Name = Entity.Name;
         u.EMail = Entity.EMail;
         u.Adress = Entity.Adress;
         _Context.SaveChanges();

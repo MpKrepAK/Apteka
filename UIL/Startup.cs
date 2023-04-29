@@ -8,6 +8,7 @@ using DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ML.Mapper;
+using ProviderRepository = DAL.Repositories.ProviderRepository;
 
 namespace UIL;
 
@@ -52,6 +53,7 @@ public class Startup
 
         services.AddScoped<IPreporateTypeService, PreporateTypeService>();
         services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<IProviderService, ProviderService>();
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPreporateRepository, PreporateRepository>();
