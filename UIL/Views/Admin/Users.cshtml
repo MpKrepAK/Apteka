@@ -21,10 +21,25 @@
 						<div class="aside__text">Роли</div>
 						@for (int i = 0; i < Model.Roles.Count; i++)
 						{
-							<input type="checkbox" name="SelectedRoles" value="@Model.Roles[i].Id.ToString()"/>
+							if (Model.SelectedRoles!=null)
+							{
+								if (Model.SelectedRoles.Contains(Model.Roles[i].Id))
+								{
+									<input type="checkbox" name="SelectedRoles" value="@Model.Roles[i].Id.ToString()" checked/>
+								}
+								else
+								{
+									<input type="checkbox" name="SelectedRoles" value="@Model.Roles[i].Id.ToString()"/>
+								}
+							}
+							else
+							{
+								<input type="checkbox" name="SelectedRoles" value="@Model.Roles[i].Id.ToString()"/>
+							}
 							<label>@Model.Roles[i].Name</label>
 						}
-						<button type="submit" class="btn btn--big">Найти</button>
+						<input type="submit" class="btn btn--big" value="Найти" />
+						@* <button type="submit" class="btn btn--big">Найти</button> *@
 					</form>
 				</div>
 				<div class="catalog">

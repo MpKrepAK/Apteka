@@ -113,6 +113,7 @@ public class AdminController : Controller
         else
             vm = model;
         vm.Roles = _roleRepository.GetAll().Select(x=>_mapper.Map<Role,RoleModel>(x)).ToList();
+        //vm.SelectedRoles = new List<int>();
         vm.Users = _userRepository.GetAll().Select(x=>_mapper.Map<User,UserModel>(x)).ToList();
         if (model.SelectedRoles!=null&&model.SelectedRoles.Count>0)
         {
