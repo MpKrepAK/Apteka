@@ -35,6 +35,10 @@ namespace UIL.Controllers
         [HttpGet]
         public IActionResult Registration()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index","Home");
+            }
             return View("Registration");
         }
         [HttpPost]
@@ -48,10 +52,12 @@ namespace UIL.Controllers
               {
                   return View("Registration");
               }
+              
+              _logger.LogInformation("Пользователь зарегистрировался под EMail:\t"+user.EMail);
+              return RedirectToAction("Index","Home");
 
-              return RedirectToAction("","Home");
           }
-          _logger.LogInformation("Пользователь зарегистрировался под EMail:\t"+user.EMail);
+          
           return View("Registration");
       }
 

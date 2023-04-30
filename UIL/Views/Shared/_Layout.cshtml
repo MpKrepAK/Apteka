@@ -28,7 +28,7 @@
 					{
 						<div class="header__menu">
 							<div class="title">Вы авторезированы</div>
-							<a class="btn" asp-controller="Card" asp-action="UserCard">Личный кабинет</a>
+							<a class="btn" asp-controller="Home" asp-action="UserCard">Личный кабинет</a>
 							@if (User.IsInRole("Admin"))
 							{
 								<a class="btn" asp-controller="Admin" asp-action="Index">Админка</a>

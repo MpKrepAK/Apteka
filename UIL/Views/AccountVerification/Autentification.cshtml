@@ -22,8 +22,8 @@
                   asp-controller="AccountVerification"
                   asp-antiforgery="true">
         <div class="input__wrapper">
-          <input asp-for="EMail" placeholder="Логин" class="input">
-          <input asp-for="Password" placeholder="Пароль" class="input">
+          <input asp-for="EMail" placeholder="Логин" class="input">@Html.ValidationMessageFor(x=>x.EMail)
+          <input asp-for="Password" placeholder="Пароль" class="input">@Html.ValidationMessageFor(x=>x.Password)
         </div>
         <div class="window__links">
           <a asp-action="Registration" class="window__link">Регистрация</a>

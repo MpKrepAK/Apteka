@@ -31,7 +31,7 @@ public class RegistrationService : IRegistrationService
         
         var u = _mapper.Map<UserRegistration, User>(user);
 
-        u.RoleId = 2;
+        u.RoleId = 1;
         
         
         _context.Users.Add(u);

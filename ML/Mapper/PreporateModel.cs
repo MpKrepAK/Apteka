@@ -7,6 +7,7 @@ public class PreporateModel
 {
     public int Id { get; set; }
     [Required(ErrorMessage = "Все поля должны быть заполнены")]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "Длина должна быть от 2 до 50 символов")]
     public string Name { get; set; }
     [Required(ErrorMessage = "Все поля должны быть заполнены")]
     public int ProviderId { get; set; }

@@ -7,6 +7,7 @@ public class Preporate
 {
     [Key]
     public int Id { get; set; }
+    [MaxLength(50)]
     public string Name { get; set; }
     [ForeignKey("Provider")]
     public int ProviderId { get; set; }

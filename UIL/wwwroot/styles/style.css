@@ -523,3 +523,10 @@ body {
     border-bottom: 1px solid var(--first-color);
     cursor: pointer;
 }
+
+.central__div{
+    width: 50%; 
+    margin: 30vh auto;
+    text-align: center;
+    font-size: 32px;
+}

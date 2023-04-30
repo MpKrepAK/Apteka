@@ -40,12 +40,11 @@ public class CardController : Controller
         _preporateService = preporateService;
     }
     
-    [HttpGet]
-    public IActionResult Index()
-    {
-        Console.WriteLine("Удалить----------------------------------");
-        return View("Preporate");
-    }
+    // [HttpGet]
+    // public IActionResult Index()
+    // {
+    //     return View("Preporate");
+    // }
 
     #region Type
 

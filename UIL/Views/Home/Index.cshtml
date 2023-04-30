@@ -2,7 +2,7 @@
 
 @model UIL.Models.PreporatesSearch
 @{
-	ViewBag.Title = "Препораты";
+	ViewBag.Title = "Каталог";
 }
 
 @if(User.Identity.IsAuthenticated){
@@ -10,7 +10,7 @@
 		<div class="container">
 			<div class="main__inner">
 				<div class="aside">
-					<form asp-action="Preporates" class="aside__form">
+					<form asp-action="Index" class="aside__form">
 						<div class="aside__title">Поиск</div>
 						<div class="aside__text">Дата</div>
 						<input asp-for="DateOfProductionDown" class="input input--small" />
@@ -77,7 +77,6 @@
 					</form>
 				</div>
 				<div class="catalog">
-					<a class="btn" asp-controller="Card" asp-action="PreporateAdd">Добавить</a>
 					<div class="catalog__items">
 						@{
 							if (Model.Preporates != null)
@@ -94,7 +93,7 @@
 											<div class="item__img" style="background-image: url(data:image;base64,@System.Convert.ToBase64String(item.Image));"></div>
 										}
 										<div class="item__content">
-											<p class="item__title">@item.Name</p>
+											<a asp-action="PreporateCard" asp-route-Id="@item.Id.ToString()" class="item__title">@item.Name</a>
 											<div class="item__infos">
 												<div class="item__info">Тип: @PreporateTypeRepository.GetById(item.PreporateTypeId).Name </div>
 												<div class="item__info">Цена: @item.Cost.ToString()</div>
@@ -111,4 +110,8 @@
 			</div>
 		</div>
 	</div>
+}
+else
+{
+<div class="central__div">Для доступа к сайту авторизируйтесь</div>
 }

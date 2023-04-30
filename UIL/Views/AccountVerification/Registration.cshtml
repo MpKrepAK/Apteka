@@ -22,10 +22,10 @@
                   asp-controller="AccountVerification"
                   asp-antiforgery="true">
         <div class="input__wrapper">
-          <input asp-for="FirstName" placeholder="Email" class="input">
-          <input asp-for="LastName" placeholder="Email" class="input">
-          <input asp-for="EMail" placeholder="Email" class="input">
-          <input asp-for="Password" placeholder="Пароль" class="input">
+          <input asp-for="FirstName" placeholder="Имя" class="input">@Html.ValidationMessageFor(x=>x.FirstName)
+          <input asp-for="LastName" placeholder="Фамилия" class="input">@Html.ValidationMessageFor(x=>x.LastName)
+          <input asp-for="EMail" placeholder="Email" class="input">@Html.ValidationMessageFor(x=>x.EMail)
+          <input asp-for="Password" placeholder="Пароль" class="input">@Html.ValidationMessageFor(x=>x.Password)
         </div>
         <div class="window__links">
            <a asp-action="Autentification" class="window__link">Авторизация</a>

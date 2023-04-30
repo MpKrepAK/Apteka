@@ -1,0 +1,56 @@
+﻿@inject IPreporateTypeRepository types
+@inject IProviderRepository providers
+@using Microsoft.IdentityModel.Tokens
+@model ML.Mapper.PreporateModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@functions
+{
+    SelectList GetTypes()
+    {
+        return new SelectList(types.GetAll(), "Id", "Name");
+    }
+    SelectList GetProviders()
+    {
+        return new SelectList(providers.GetAll(), "Id", "Name");
+    }
+}
+
+<main class="main">
+    <div class="container">
+        <div class="main__inner">
+                <div class="two-columns">
+                    @if (Model.Image.IsNullOrEmpty())
+                    {
+                        <div class="img" style="background-image:url('./images/box.png');">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="img" style="background-image: url(data:image;base64,@System.Convert.ToBase64String(Model.Image));">
+                        </div>
+                    }
+                    
+                    <div class="content">
+                        <div class="content__item">
+                            <div class="text">Название</div>
+                            <div class="text">@Model.Name</div>
+                            <div class="text">Дата производства</div>
+                            <div class="text">@Model.DateOfProduction.ToString()</div>
+                            <div class="text">Поставщик</div>
+                            <div class="text">@providers.GetById(Model.ProviderId).Name</div>
+                            <div class="text">Тип</div>
+                            <div class="text">@types.GetById(Model.PreporateTypeId).Name</div>
+                            <div class="text">Количество</div>
+                            <div class="text">@Model.Count.ToString()</div>
+                            <div class="text">Цена</div>
+                            <div class="text">@Model.Cost.ToString()</div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</main>
