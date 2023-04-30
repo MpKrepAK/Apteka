@@ -20,21 +20,16 @@ public class HomeController : Controller
     {
         var vm = new PreporatesSearch()
         {
-            Providers = _providerRepository.GetAll().ToList()
+            //Providers = _providerRepository.GetAll().ToList()
         };
         
         return View("Index",vm);
-    }
-
-    public IActionResult GetImage(byte[] imageData)
-    {
-        return new FileContentResult(imageData, "image/jpeg");
     }
     
     [HttpPost]
     public IActionResult Filtered(PreporatesSearch preporatesSearch)
     {
-        Console.WriteLine(preporatesSearch.Provider);
+        //Console.WriteLine(preporatesSearch.Providers);
         return View("Index",preporatesSearch);
     }
     

@@ -6,7 +6,7 @@ btn.addEventListener('click', () => {
   console.log(menu);
 });
 
-const radios = document.querySelectorAll('[type="checkbox"]');
+const radios = document.querySelectorAll('[type=".item__controls > input"]');
 
 document.addEventListener('click', (e) => {
 	if (e.target.tagName.toLowerCase() !== 'input') {

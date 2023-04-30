@@ -1,15 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using ML.Mapper;
 using ML.Models;
 
 namespace UIL.Models;
 
 public class PreporatesSearch
 {
-    public List<Provider> Providers { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
-    public string Provider { get; set; }
-    public int Type { get; set; }
-    public int Appointment { get; set; }
-    public DateTime DateUp { get; set; }=DateTime.Now;
-    public DateTime DateDown { get; set; } = new DateTime(2022, 1, 1);
+    public List<int> SelctedProviders { get; set; }
+    public List<int> SelctedTypes { get; set; }
+    public List<ProviderModel> Providers { get; set; }
+    public List<TypeModel> Types { get; set; }
+    public List<PreporateModel> Preporates { get; set; }
+    public DateTime DateOfProductionUp { get; set; }
+    public DateTime DateOfProductionDown { get; set; }
+
+    public PreporatesSearch()
+    {
+        DateOfProductionUp=DateTime.Now;
+        DateOfProductionDown = new DateTime(2000, 1, 1);
+    }
 }

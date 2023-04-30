@@ -3,8 +3,17 @@
     ViewBag.Title = "Админка";
 }
 
-<a asp-controller="Admin" asp-action="Index">Препораты</a>
-<a asp-action="Types">Типы препоратов</a>
-<a asp-action="Roles">Роль</a>
-<a asp-action="Providers">Поставщики</a>
-<a asp-action="Users">Препораты</a>
+<div class="modal">
+    <div class="modal__content">
+      <div class="modal__title">
+        Навигация
+      </div>
+      <nav class="modal__nav">
+        <a asp-action="Preporates">Препораты</a>
+        <a asp-action="Types">Типы препоратов</a>
+        <a asp-action="Roles">Роль</a>
+        <a asp-action="Providers">Поставщики</a>
+        <a asp-action="Users">Препораты</a>
+      </nav>
+    </div>
+  </div>

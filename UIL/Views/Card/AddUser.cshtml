@@ -15,26 +15,24 @@
     <div class="container">
         <div class="main__inner">
             <form asp-action="UserAddSave" asp-controller="Card">
-                <div class="two-columns">
-                    <div class="content">
-                        <div class="content__item">
-                            <div class="text">Имя</div>
-                            <input asp-for=Id type="hidden" class="input input--small">
-                            <input asp-for="FirstName" class="input input--small">
-                            <div class="text">Фамилия</div>
-                            <input asp-for="LastName" class="input input--small">
-                            <div class="text">EMail</div>
-                            <input asp-for="EMail" class="input input--small">
-                            <div class="text">Пароль</div>
-                            <input asp-for="Password" class="input input--small">
-                            <div class="text">Пароль</div>
-                            <select asp-for="RoleId" asp-items="@GetList()">
-                                <option>Выберите роль</option>
-                            </select>
-                        </div>
-                        <button class="btn" type="submit">Добавить</button>
-                    </div>
-                </div>
+                <div class="content">
+                                        <div class="content__item">
+                                            <div class="text">Имя</div>
+                                            <input asp-for=Id type="hidden" class="input input--small">
+                                            <input asp-for="FirstName" class="input input--small">
+                                            <div class="text">Фамилия</div>
+                                            <input asp-for="LastName" class="input input--small">
+                                            <div class="text">EMail</div>
+                                            <input asp-for="EMail" class="input input--small">
+                                            <div class="text">Пароль</div>
+                                            <input asp-for="Password" class="input input--small">
+                                            <div class="text">Пароль</div>
+                                            <select asp-for="RoleId" asp-items="@GetList()">
+                                                <option>Выберите роль</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn" type="submit">Добавить</button>
+                                    </div>
             </form>
         </div>
     </div>

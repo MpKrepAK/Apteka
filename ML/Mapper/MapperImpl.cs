@@ -16,5 +16,7 @@ public class MapperImpl : Profile
         CreateMap<Provider, ProviderModel>();
         CreateMap<UserModel, User>();
         CreateMap<User, UserModel>();
+        CreateMap<PreporateModel, Preporate>();
+        CreateMap<Preporate, PreporateModel>();
     }
 }

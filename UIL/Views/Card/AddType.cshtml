@@ -8,16 +8,14 @@
     <div class="container">
         <div class="main__inner">
             <form asp-action="TypeAddSave" asp-controller="Card">
-                <div class="two-columns">
-                    <div class="content">
-                        <div class="content__item">
-                            <div class="text">Название</div>
-                            <input asp-for=Id type="hidden" class="input input--small">
-                            <input asp-for="Name" class="input input--small">
-                        </div>
-                        <button class="btn" type="submit">Добавить</button>
-                    </div>
-                </div>
+                <div class="content">
+                                        <div class="content__item">
+                                            <div class="text">Название</div>
+                                            <input asp-for=Id type="hidden" class="input input--small">
+                                            <input asp-for="Name" class="input input--small">
+                                        </div>
+                                        <button class="btn" type="submit">Добавить</button>
+                                    </div>
             </form>
         </div>
     </div>

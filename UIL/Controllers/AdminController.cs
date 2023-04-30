@@ -39,9 +39,47 @@ public class AdminController : Controller
     {
         return View("AdminNav");
     }
-    public IActionResult Preporates()
+    public IActionResult Preporates(PreporatesSearch model)
     {
-        return View();
+        PreporatesSearch vm;
+        if (model==null)
+            vm = new PreporatesSearch();
+        else
+            vm = model;
+        
+        vm.Providers = _providerRepository
+            .GetAll()
+            .Select(x=>_mapper.Map<Provider,ProviderModel>(x))
+            .ToList();
+        vm.Types = _preporateTypeRepository
+            .GetAll()
+            .Select(x=>_mapper.Map<PreporateType,TypeModel>(x))
+            .ToList();
+        vm.Preporates = _preporateRepository
+            .GetAll()
+            .Select(x=>_mapper.Map<Preporate,PreporateModel>(x))
+            .ToList();
+        
+        if (!vm.Name.IsNullOrEmpty())
+        {
+            vm.Preporates=vm.Preporates
+                .Where(x => x.Name.ToLower().Contains(vm.Name.ToLower()))
+                .ToList();
+        }
+        vm.Preporates=vm.Preporates
+            .Where(x=>x.DateOfProduction>=model.DateOfProductionDown&&x.DateOfProduction<=model.DateOfProductionUp)
+            .ToList();
+
+        if (model.SelctedProviders!=null)
+        {
+            vm.Preporates = vm.Preporates.Where(x => model.SelctedProviders.Contains(x.ProviderId)).ToList();
+        }
+        if (model.SelctedTypes!=null)
+        {
+            vm.Preporates = vm.Preporates.Where(x => model.SelctedTypes.Contains(x.PreporateTypeId)).ToList();
+        }
+        
+        return View(vm);
     }
     public IActionResult Types(TypesSearch model)
     {
@@ -152,5 +190,17 @@ public class AdminController : Controller
                 .ToList();
         }
         return View(model);
+    }
+}
+class ItemComparer : IEqualityComparer<PreporateModel>
+{
+    public bool Equals(PreporateModel x, PreporateModel y)
+    {
+        return x.Id == y.Id;
+    }
+
+    public int GetHashCode(PreporateModel obj)
+    {
+        return obj.Id.GetHashCode();
     }
 }

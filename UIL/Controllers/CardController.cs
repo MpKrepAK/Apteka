@@ -15,48 +15,35 @@ public class CardController : Controller
 {
     private readonly IMapper _mapper;
     private readonly ILogger _logger;
-    // private readonly IPreporateRepository _preporateRepository;
-    // private readonly IUserRepository _userRepository;
-    // private readonly IPreporateTypeRepository _preporateTypeRepository;
-    // private readonly IRoleRepository _roleRepository;
-    // private readonly IProviderRepository _providerRepository;
     
     private readonly IPreporateTypeService _preporateTypeService;
     private readonly IRoleService _roleService;
     private readonly IProviderService _providerService;
     private readonly IUserService _userService;
+    private readonly IPreporateService _preporateService;
     
     public CardController(ILogger<CardController> logger,
         IMapper mapper,
-        IPreporateRepository preporateRepository, 
-        IUserRepository userRepository, 
-        IPreporateTypeRepository preporateTypeRepository,
-        IRoleRepository roleRepository,
-        IProviderRepository providerRepository,
         IPreporateTypeService preporateTypeService,
         IRoleService roleService,
         IProviderService providerService,
-        IUserService userService)
+        IUserService userService,
+        IPreporateService preporateService)
     {
         _logger = logger;
         _mapper = mapper;
-        // _preporateRepository = preporateRepository;
-        // _userRepository = userRepository;
-        // _preporateTypeRepository = preporateTypeRepository;
-        // _roleRepository = roleRepository;
-        // _providerRepository = providerRepository;
         
         _preporateTypeService = preporateTypeService;
         _roleService = roleService;
         _providerService = providerService;
         _userService = userService;
+        _preporateService = preporateService;
     }
     
     [HttpGet]
-    public IActionResult Index(int Id)
+    public IActionResult Index()
     {
-        //var prep = _preporateRepository.GetById(Id);
-        //return View("Preporate",prep);
+        Console.WriteLine("Удалить----------------------------------");
         return View("Preporate");
     }
 
@@ -265,6 +252,60 @@ public class CardController : Controller
             return View("AddUser", user);
         _logger.LogInformation($"Пользователь добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
         return RedirectToAction("Users","Admin");
+    }
+    #endregion
+    
+    #region Preporate
+
+    [HttpGet]
+    public async Task<IActionResult> PreporateCard(int Id)
+    {
+        var preporate = _preporateService.GetById(Id);
+        await preporate;
+        if (preporate.Result == null)
+            return RedirectToAction("Preporates", "Admin");
+        return View("Preporate",preporate.Result);
+    }
+    
+    [HttpGet]
+    public IActionResult PreporateAdd()
+    {
+        return View("AddPreporate",new PreporateModel());
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> PreporateDel(int Id)
+    {
+        var res= await _preporateService.Delete(Id);
+        if (res)
+            _logger.LogInformation($"Прерорат с Id {Id} удален пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Preporates","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> PreporateUpdate(PreporateModel preporate)
+    {
+        Console.WriteLine(preporate.PreporateTypeId);
+        Console.WriteLine(ModelState.IsValid);
+        if (!ModelState.IsValid)
+            return View("Preporate", preporate);
+        var res = await _preporateService.Update(preporate);
+        if (!res)
+            return View("Preporate", preporate);
+        _logger.LogInformation($"Прерорат с Id {preporate.Id} изменен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Preporates","Admin");
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> PreporateAddSave(PreporateModel preporate)
+    {
+        if (!ModelState.IsValid)
+            return View("AddPreporate", preporate);
+        var res = await _preporateService.Add(preporate);
+        if (!res)
+            return View("AddPreporate", preporate);
+        _logger.LogInformation($"Прерорат добавлен пользователем с Id {User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value}");
+        return RedirectToAction("Preporates","Admin");
     }
     #endregion
 }

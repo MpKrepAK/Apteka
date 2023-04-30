@@ -33,7 +33,9 @@ public class PreporateRepository : IPreporateRepository
     {
         var u= _Context.Preporates.FirstOrDefault(x=>x.Id==Entity.Id);
         u.Name = Entity.Name;
-        
+        u.PreporateTypeId = Entity.PreporateTypeId;
+        u.Image = Entity.Image;
+        u.ProviderId = Entity.ProviderId;
         u.Name = Entity.Name;
         u.Name = Entity.Name;
         _Context.SaveChanges();
